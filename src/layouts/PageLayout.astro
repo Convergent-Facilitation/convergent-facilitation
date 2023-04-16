@@ -25,10 +25,22 @@ import Footer from "../components/Footer.astro";
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="generator" content="Blogster" />
     <Favicon />
+    <script is:inline src="https://d3js.org/d3.v3.js"/>
     <slot name="meta" />
     <GoogleFont />
     <ThemeScript />
     <FontAwesome />
+    <style>
+      .node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+  }
+  
+  .link {
+    stroke: #999;
+    stroke-opacity: .6;
+  }
+  </style>
   </head>
 
   <body
