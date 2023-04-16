@@ -38,7 +38,9 @@
         --color-text-selection: 0 0 0;
 
         /* white */
-        --color-bg-body: 255 255 255;
+        /* --color-bg-body: 255 255 255; */
+        --color-bg-body: 242 245 236;
+
         /* tailwind amber-100 #fef3c7 */
         --color-bg-code: 254 243 199;
         /* tailwind lime-200 #d9f99d */
