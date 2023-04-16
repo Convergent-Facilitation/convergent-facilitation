@@ -1,9 +1,17 @@
 
 import { defineConfig } from 'astro/config';
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://convergent-facilitation.github.io',
+  integrations: [
+    sitemap(),
+    tailwind({
+      config: { applyBaseStyles: false },
+    }),
+  ],
 });
 
 // /* eslint-disable turbo/no-undeclared-env-vars */
@@ -39,10 +47,10 @@ export default defineConfig({
 //   // server: { port: SERVER_PORT },
 //   // site: BASE_URL,
 //   site: LIVE_URL
-//   // integrations: [
-//   //   sitemap(),
-//   //   tailwind({
-//   //     config: { applyBaseStyles: false },
-//   //   }),
-//   // ],
+//   integrations: [
+//     sitemap(),
+//     tailwind({
+//       config: { applyBaseStyles: false },
+//     }),
+//   ],
 // });
