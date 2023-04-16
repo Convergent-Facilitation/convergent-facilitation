@@ -6,9 +6,11 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://convergent-facilitation.github.io',
+  base: '/convergent-facilitation',
   integrations: [
     sitemap(),
-    tailwind({
+    tailwind(
+      {
       config: { applyBaseStyles: false },
     }),
   ],
