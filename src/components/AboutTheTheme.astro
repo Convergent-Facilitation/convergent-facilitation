@@ -10,7 +10,7 @@
           pl-6 relative block leading-[150%]
           after:absolute after:content-[''] after:w-2 after:h-full after:top-0 after:left-0 after:bg-primary-green
         ">
-        <div style="display: flex; align-items: center;">
+        <div id="participate-div" style="display: flex; align-items: center;">
           <svg id="participate-plot" style="width:800px"></svg>
           <div style="clear:both; font-size:15px">
             <span style="font-size: 25px;">
@@ -35,7 +35,7 @@
             pl-6 relative block leading-[150%]
             after:absolute after:content-[''] after:w-2 after:h-full after:top-0 after:left-0 after:bg-primary-purple
           ">
-          <div style="display: flex; align-items: center;">
+          <div id="grow-div" style="display: flex; align-items: center;">
             <svg id="grow-plot" style="width:900px"></svg>
             <div style="clear:both; font-size:15px">
               <span style="font-size: 25px;">
@@ -59,7 +59,7 @@
             pl-6 relative block leading-[150%]
             after:absolute after:content-[''] after:w-2 after:h-full after:top-0 after:left-0 after:bg-primary-blue
           ">
-          <div style="display: flex; align-items: center;">
+          <div id="support-div" style="display: flex; align-items: center;">
             <svg id="support-plot" style="width:650px"></svg>
             <div style="clear:both; font-size:15px">
               <span style="font-size: 25px;">
@@ -71,7 +71,8 @@
         </span>
 
         <p style="text-align: right;"> 
-          <a class="unset rounded-sm transition-[background-size] duration-150 ease-in-out bg-left-bottom bg-[length:26%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-blue to-primary-blue dark:bg-none dark:hover:text-primary-yellow" href="blog"><span style="text-align: right"> <strong>» Find an experienced CF facilitator</strong></span>
+          <a class="unset rounded-sm transition-[background-size] duration-150 ease-in-out bg-left-bottom bg-[length:26%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-blue to-primary-blue dark:bg-none dark:hover:text-primary-yellow" href="blog">
+            <span style="text-align: right"> <strong>» Find an experienced CF facilitator</strong></span>
           </a>
         </p>
   </section>
@@ -82,7 +83,7 @@
             pl-6 relative block leading-[150%]
             after:absolute after:content-[''] after:w-2 after:h-full after:top-0 after:left-0 after:bg-primary-yellow
           ">
-          <div style="display: flex; align-items: center;">
+          <div id="soil-div" style="display: flex; align-items: center;">
 
             <svg id="soil-plot" style="width:600px"></svg>
             <div style="clear:both; font-size:15px">
@@ -98,14 +99,18 @@
           <a class="unset rounded-sm transition-[background-size] duration-150 ease-in-out bg-left-bottom bg-[length:39%_55%] hover:bg-[length:100%_55%] bg-no-repeat bg-gradient-to-r from-primary-yellow to-primary-yellow dark:bg-none dark:hover:text-primary-yellow" href="blog"><span style="text-align: right"> <strong>» Learn how you can contribute</strong></span>
           </a>
         </p>
+
   </section>
 
 <!-- <script is:inline src="/src/scripts/participate.js"/> -->
 <!-- <script is:inline src="/src/scripts/grow.js"/>
 <script is:inline src="/src/scripts/fertilesoil.js"/>
 <script is:inline src="/src/scripts/support.js"/> -->
+
 <script is:inline>
-(() => {
+
+function participate(){
+
 
   var width = 150,
     height = 150;
@@ -113,8 +118,8 @@
   var radius = 7
   
   var force = d3.layout.force()
-    .charge(-17)
-    .friction(0.9)
+    .charge(-22)
+    .friction(0.8)
     .linkDistance(30)
     .size([width, height]);
   
@@ -182,39 +187,30 @@
       {"name":"Participant","group":"#bef264"},
       {"name":"Participant","group":"#bef264"},
   
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-  //   {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-    // {"name":"stkbl0001","group":"#8ae6fb"},
-  
-  //   {"name":"stkbl0001","group":"#bef264"},
-  
   ],
   "links":[
    
   ] };    
     
   }
-  
-  })()
+}
+participate();
+function remove(){
+  var svg = d3.select("#participate-plot")
+  svg.selectAll("*").remove();
+
+}
+
+function redraw () {
+  remove();
+  participate();
+}
+document.getElementById('participate-div').addEventListener('mouseenter', redraw);
+
 </script>
 
 <script>
-  (() => {
+function grow(){
 
 var width = 150,
     height = 150;
@@ -255,6 +251,7 @@ var link = svg.selectAll(".link")
     });
 
 var node = svg.selectAll(".node")
+    // .remove()
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
@@ -304,22 +301,35 @@ function getData() {
   ] };    
     
 }
+}
+// })()
+grow();
 
-})()
+function remove(){
+  var svg = d3.select("#grow-plot")
+  svg.selectAll("*").remove();
+
+}
+
+function redraw () {
+  remove();
+  grow();
+}
+document.getElementById('grow-div').addEventListener('mouseenter', redraw);
 
 </script>
 
 <script>
-  (() => {
 
+function support(){
 var width = 150,
   height = 150;
 var color = d3.scale.category20();
 var radius = 7
 
 var force = d3.layout.force()
-  .charge(-20)
-  .friction(0.9)
+  .charge(-30)
+  .friction(0.8)
   .linkDistance(30)
   .size([width, height]);
 
@@ -395,12 +405,26 @@ return {
   
 }
 
-})()
+}
+
+support();
+function remove(){
+  var svg = d3.select("#support-plot")
+  svg.selectAll("*").remove();
+
+}
+
+function redraw () {
+  remove();
+  support();
+}
+document.getElementById('support-div').addEventListener('mouseenter', redraw);
+
 
 </script>
 
 <script>
-(() => {
+function soil(){
 
 var width = 150,
     height = 150;
@@ -467,31 +491,34 @@ function getData() {
 
   return {
   "nodes":[
-    // {"name":"stkbl0001","group":"#8ae6fb", "radius":5},
-    // {"name":"stkbl0001","group":"#8ae6fb", "radius":5},
-    // {"name":"stkbl0001","group":"#8ae6fb", "radius":5},
-    // {"name":"stkbl0001","group":"#8ae6fb", "radius":5},
+   
     {"name":"Soil","group":"#FFDE69", "radius":50},
-    // {"name":"stkbl0001","group":"#FF6BFA", "radius":5},
-    // {"name":"stkbl0001","group":"#FF6BFA", "radius":8},
-    // {"name":"stkbl0001","group":"#FF6BFA", "radius":7},
-    // {"name":"stkbl0001","group":"#FF6BFA", "radius":10},
-    // // {"name":"stkbl0001","group":"#FF6BFA", "radius":9},
-    // {"name":"stkbl0001","group":"#FF6BFA", "radius":15},
-    // // {"name":"stkbl0001","group":"#FF6BFA", "radius":20},
+
 
    
   ],
   "links":[
-    // {"source":"stkbl0001","target":"stkbl0005","value":3},
-    // {"source":"stkbl0002","target":"stkbl0005","value":3},
-    // {"source":"stkbl0003","target":"stkbl0005","value":3},
-    // {"source":"stkbl0004","target":"stkbl0005","value":3}
+    
   ] };    
     
 }
 
-})()
+}
+soil();
+// function remove(){
+//   var svg = d3.select("#soil-plot")
+//   svg.selectAll("*").remove();
+
+// }
+
+// function redraw () {
+//   remove();
+//   soil();
+// }
+// document.getElementById('soil-div').addEventListener('mouseenter', redraw);
+
 
 
 </script>
+
+
