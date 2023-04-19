@@ -20,11 +20,18 @@ const sortedPosts = posts
 ---
 
 <PageLayout>
-  <PageMeta title={`Blog | ${SITE_TITLE}`} slot="meta" />
-  <section slot="main">
+  <PageMeta title={`Events | ${SITE_TITLE}`} slot="meta" />
+  
+  <section slot="main"> 
+    <p style="font-size:12px">We are currently doing a lot of inner work in the community and therefore offer fewer events than we would like to. We expect to offer again more events starting from the second half of 2023 and many more in 2024. Also, we have multiple groups that regularly meet for peer-practice. To find those events and join these please join our <a
+      href="convergent-facilitation/community">community platform on Hylo</a>.</p>
+    <br> 
+    <h1><strong>Upcoming events</strong></h1>
     <ul>
       {
-        sortedPosts.map((post) => {
+        sortedPosts
+        .filter((post) => post.frontmatter.past == false)
+        .map((post) => {
           const formattedDate = new Date(
             post.frontmatter.date
           ).toLocaleDateString("en-us", {
@@ -51,6 +58,70 @@ const sortedPosts = posts
                       <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
                     </span>
                   </a>
+                  <p style="font-size:15px">{post.frontmatter.description}</p>
+
+                ) : (
+                  <a
+                    href={`/convergent-facilitation/blog/${post.slug}`}
+                    class="unset
+                        transition-[background-size] duration-300 
+                        bg-gradient-to-r bg-left-bottom bg-no-repeat
+                        bg-[length:0%_55%] hover:bg-[length:100%_55%] dark:bg-[length:0%_2px] hover:dark:bg-[length:100%_2px]
+                        from-primary-blue to-primary-blue dark:from-primary-blue dark:to-primary-blue
+                      "
+                  >
+                    {post.frontmatter.title}                    
+                  </a>
+                  <p style="font-size:15px">{post.frontmatter.description}</p>
+
+                )}
+              </div>
+              <div class="text-text-muted text-sm italic pt-1">
+                <time datetime={post.frontmatter.date.toISOString()}>
+                  {formattedDate}
+                </time>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+  <section slot="main">
+    <h1><strong>Past events</strong> (with recordings)</h1>
+    <ul>
+      {
+        sortedPosts
+        .filter((post) => post.frontmatter.past == true)
+        .map((post) => {
+          const formattedDate = new Date(
+            post.frontmatter.date
+          ).toLocaleDateString("en-us", {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+          return (
+          <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
+              <div class="title">
+                {post.frontmatter.external ? (
+                  <a
+                    href={post.frontmatter.url}
+                    target="_blank"
+                    class="unset
+                        transition-[background-size] duration-300 
+                        bg-gradient-to-r bg-left-bottom bg-no-repeat
+                        bg-[length:0%_55%] hover:bg-[length:100%_55%] dark:bg-[length:0%_2px] hover:dark:bg-[length:100%_2px]
+                        from-primary-blue to-primary-blue dark:from-primary-blue dark:to-primary-blue
+                      "
+                  >
+                    <span>{post.frontmatter.title}</span>
+                    <span>
+                      <i class="ml-1 mr-1 text-[12px] pb-2 fa-solid fa-up-right-from-square" />
+                    </span>
+                    <p style="font-size:15px">{post.frontmatter.description}</p>
+
+                  </a>
                 ) : (
                   <a
                     href={`/blog/${post.slug}`}
@@ -63,7 +134,7 @@ const sortedPosts = posts
                   >
                     {post.frontmatter.title}                    
                   </a>
-                  <p>{post.frontmatter.description}</p>
+                  <p style="font-size:15px">{post.frontmatter.description}</p>
 
                 )}
               </div>

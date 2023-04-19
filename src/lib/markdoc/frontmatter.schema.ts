@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const baseSchema = z.object({
   draft: z.boolean().default(false),
+  past: z.boolean().default(false),
   featured: z.boolean().default(false),
   title: z.string({
     required_error: "Required frontmatter missing: title",
@@ -34,6 +35,7 @@ export const blog = z.discriminatedUnion("external", [
   // external link
   baseSchema.extend({
     external: z.literal(true),
+    description: z.optional(z.string()),
     url: z.string({
       required_error:
         "external is true but url is missing. url must be set for posts marked as external.",
